@@ -31,7 +31,7 @@ namespace PersonLib
         /// <summary>
         /// Пол
         /// </summary>
-        private Gender _gender;
+        public Gender Gender;
 
         #endregion
 
@@ -72,7 +72,7 @@ namespace PersonLib
         /// <summary>
         /// Возраст
         /// </summary>
-        public int Age
+        public virtual int Age
         {
             get 
             { 
@@ -80,38 +80,34 @@ namespace PersonLib
             }
             set
             {
-                if (value < 0 || value > 150)
+                const int minAge = 0;
+                const int maxAge = 150;
+                if (value < minAge || value > maxAge)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must +" +
-                        $"be from 0 to 150.");
+                    throw new ArgumentOutOfRangeException("Возраст должен быть " +
+                        $"от {minAge} до {maxAge}.");
                 }
                 _age = value;
             }
-        }
+        }                
 
+        //TODO: В свойство на get +
         /// <summary>
-        /// Пол
-        /// </summary>
-        public Gender Gender
+        /// Вывод данных о человеке
+        /// </summary>        
+        public virtual string Info
         {
-            get 
-            { 
-                return _gender; 
-            }
-            set 
-            { 
-                _gender = value; 
+            get
+            {
+               return $"Имя: {Name}\nФамилия: {Surname}\nВозраст: {Age}\nПол: {Gender}";
             }
         }
 
         #endregion
 
-        #region Конструктор
+        #region Конструктор                      
 
-        /// <summary>
-        /// Человек
-        /// </summary>
-        public Person() { }
+        public Person()  { }
 
         /// <summary>
         /// Человек
@@ -141,12 +137,11 @@ namespace PersonLib
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException($"{nameof(value)} is null or empty.");
+                throw new ArgumentNullException();
             }
             if (!IsNameCorrect(value))
             {
-                throw new FormatException($"{nameof(value)} can contain +" +
-                    $" only Russian or English letters.");
+                throw new FormatException("Используйте только русские буквы.");
             }
         }
 
@@ -157,14 +152,9 @@ namespace PersonLib
         private static bool IsNameCorrect(string value)
         {
             Regex nameRegex = new Regex(
-                "^(([А-Я]|[а-я]|[A-Z]|[a-z])+)((-)?)(([А-Я]|[а-я]|[A-Z]|[a-z])+)$");
+                "^(([А-Я]|[а-я])+)((-)?)(([А-Я]|[а-я])+)$");
 
-            if (!nameRegex.IsMatch(value))
-            {
-                return false;
-            }
-
-            return true;
+            return nameRegex.IsMatch(value);
         }
 
         /// <summary>
@@ -187,15 +177,7 @@ namespace PersonLib
             }
 
             return value.Substring(0, value.Length - 1);
-        }
-
-        /// <summary>
-        /// Вывод данных о человеке
-        /// </summary>        
-        public string PersonInfo()
-        {
-            return $"Имя: {Name}\nФамилия: {Surname}\nВозраст: {Age}\nПол: {Gender}";
-        }        
+        }                     
 
         #endregion
     }

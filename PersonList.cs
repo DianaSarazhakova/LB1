@@ -29,7 +29,7 @@ namespace PersonLib
         }
 
         #endregion
-
+        
         #region Индексатор
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace PersonLib
             {
                 if (index < 0 || index > Length - 1)
                 {
-                    throw new IndexOutOfRangeException("Index out of range.");
+                    throw new IndexOutOfRangeException("Такого индекса в списке нет.");
                 }
                 return _persons[index];
             }
@@ -81,10 +81,10 @@ namespace PersonLib
             _persons[persons.Length] = person;
         }     
               
-    /// <summary>
-    /// Очистка списка
-    /// </summary>
-    public void Clear()
+        /// <summary>
+        /// Очистка списка
+        /// </summary>
+        public void Clear()
         {
             _persons = new Person[0];
         }
@@ -97,7 +97,7 @@ namespace PersonLib
         {
             if (index < 0 || index > _persons.Length - 1)
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException("Такого индекса в списке нет.");
             }
 
             var persons = _persons;
@@ -137,7 +137,7 @@ namespace PersonLib
                 }
             }
 
-            throw new KeyNotFoundException("This person is not on the list.");
+            throw new KeyNotFoundException("Такого человека в списке нет.");
         }        
 
         #endregion

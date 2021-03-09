@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PersonLib
+{
+    
+    public enum MaritalStatus 
+    {
+        Single, 
+        Married, 
+        Widowed,  //вдова
+        Divorced, //разведен        
+    }
+}
