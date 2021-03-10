@@ -11,6 +11,20 @@ namespace PersonLib
     /// </summary>
     public class Person
     {
+        #region Константы
+
+        /// <summary>
+        /// Минимальный возраст человека
+        /// </summary>
+        public const int MinAge = 0;
+
+        /// <summary>
+        /// Максимальный возраст человека
+        /// </summary>
+        public const int MaxAge = 150;
+
+        #endregion
+
         #region Поля
 
         /// <summary>
@@ -79,13 +93,11 @@ namespace PersonLib
                 return _age; 
             }
             set
-            {
-                const int minAge = 0;
-                const int maxAge = 150;
-                if (value < minAge || value > maxAge)
+            {                
+                if (value < MinAge || value > MaxAge)
                 {
                     throw new ArgumentOutOfRangeException("Возраст должен быть " +
-                        $"от {minAge} до {maxAge}.");
+                        $"от {MinAge} до {MaxAge}.");
                 }
                 _age = value;
             }
@@ -106,8 +118,6 @@ namespace PersonLib
         #endregion
 
         #region Конструктор                      
-
-        public Person()  { }
 
         /// <summary>
         /// Человек

@@ -10,7 +10,21 @@ namespace PersonLib
     /// Взрослый человек
     /// </summary>
     public class Adult : Person
-    {       
+    {
+
+        #region Константы
+
+        /// <summary>
+        /// Минимальный возраст взрослого
+        /// </summary>
+        public new const int MinAge = 18;
+
+        /// <summary>
+        /// Максимальный возраст взрослого
+        /// </summary>
+        public new const int MaxAge = 150;
+
+        #endregion
 
         #region Поля
 
@@ -53,14 +67,12 @@ namespace PersonLib
                 return base.Age; 
             }
             set
-            {
-                const int minAge = 18;
-                const int maxAge = 150;
-                if (value < minAge || value > maxAge)
+            {                
+                if (value < MinAge || value > MaxAge)
                 {
                     throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)}  должен быть от " +
-                        $"{minAge} до {maxAge}.");
+                        $"Возраст  должен быть от " +
+                        $"{MinAge} до {MaxAge}.");
                 }
                 base.Age = value;
             }
@@ -91,17 +103,12 @@ namespace PersonLib
                 return _partner; 
             }
             set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException(
-                        $"{nameof(Partner)}", "Для партнера не может " +
-                        "быть задано пустое значение");
-                }
+            {                
 
                 if (MaritalStatus == MaritalStatus.Married &&
                     value.MaritalStatus == MaritalStatus.Married)
                 {
+                   
                     _partner = value;
                 }
                 else
@@ -195,6 +202,35 @@ namespace PersonLib
 
         #endregion
 
+        #region Конструктор                      
+
+        /// <summary>
+        /// Человек
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="surname">Фамилия</param>
+        /// <param name="age">Возраст</param>
+        /// <param name="gender">Пол</param>
+        /// <param name="passportSerial">Серия паспорта</param>
+        /// <param name="passportNumber">Номер паспорта</param>
+        /// <param name="maritalStatus">Семейное положение</param>
+        /// <param name="placeOfWork">Место работы</param>
+        public Adult(string name, string surname, byte age,
+            Gender gender, string passportSerial, string passportNumber, 
+            MaritalStatus maritalStatus, string placeOfWork) : base(name, surname, age, gender)
+        {
+            Name = name;
+            Surname = surname;
+            Age = age;
+            Gender = gender;
+            PassportSerial = passportSerial;
+            PassportNumber = passportNumber;
+            MaritalStatus = maritalStatus;            
+            PlaceOfWork = placeOfWork;
+        }
+
+        #endregion
+
         #region Методы
 
         /// <summary>
@@ -214,7 +250,17 @@ namespace PersonLib
             {
                 throw new FormatException("Введите корректное число.");
             }
-        }              
+        }
+
+        /// <summary>
+        /// Пойти в ночной клуб
+        /// </summary>  
+        /// <param name="person">Человек, который идет в клуб</param>
+        public string GoToNightclub(Adult person)
+        {
+            return $"Быть взрослым классно. " +
+                $"{person.Name}, приятно тебе провести время! :)";
+        }
 
         #endregion
     }
