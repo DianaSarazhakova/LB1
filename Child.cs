@@ -9,7 +9,7 @@ namespace PersonLib
     /// <summary>
     /// Ребенок
     /// </summary>
-    public class Child : Person
+    public class Child : PersonBase
     {
         #region Константы
 
@@ -131,13 +131,13 @@ namespace PersonLib
                 if (Mother != null)
                 {
                     info += $"\nМать:" +
-                        $" {Mother.Info}";
+                        $" {Mother.Name} {Mother.Surname} ";
                 }
 
                 if (Father != null)
                 {
                     info += $"\nОтец:" +
-                        $" {Father.Info}";
+                        $" {Father.Name} {Father.Surname} ";
                 }
 
                 return info;

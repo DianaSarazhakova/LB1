@@ -6,10 +6,12 @@ using System.Linq;
 
 namespace PersonLib
 {
+    //TODO: abstract+
+    
     /// <summary>
     /// Класс, описывающий человека
     /// </summary>
-    public class Person
+    public abstract class PersonBase
     {
         #region Константы
 
@@ -103,15 +105,14 @@ namespace PersonLib
             }
         }                
 
-        //TODO: В свойство на get +
         /// <summary>
         /// Вывод данных о человеке
         /// </summary>        
         public virtual string Info
         {
             get
-            {
-               return $"Имя: {Name}\nФамилия: {Surname}\nВозраст: {Age}\nПол: {Gender}";
+            {               
+                return $"Имя: {Name}\nФамилия: {Surname}\nВозраст: {Age}\nПол: {TranslateGender(Gender)}";
             }
         }
 
@@ -126,7 +127,7 @@ namespace PersonLib
         /// <param name="surname">Фамилия</param>
         /// <param name="age">Возраст</param>
         /// <param name="gender">Пол</param>
-        public Person(string name, string surname, byte age,
+        public PersonBase(string name, string surname, byte age,
             Gender gender)
         {
             Name = name;
@@ -138,6 +139,22 @@ namespace PersonLib
         #endregion
 
         #region Методы
+
+        /// <summary> 
+        /// Прописывает гендер русскими буквами
+        /// </summary>        
+        /// <param name="gender">Гендер для перевода</param>
+        public static string TranslateGender(Gender gender)
+        {
+            if (gender == Gender.Female)
+            {
+                return "Ж";
+            }
+            else
+            {
+                return "М";            
+            }
+        }
 
         /// <summary> 
         /// Проверяет имя или фамилию на корректность 
@@ -174,19 +191,20 @@ namespace PersonLib
         /// <param name="value">Строка для изменения</param>      
         private static string FirstUpper(string value)
         {
-            value = value.ToLower();
-            string[] name = value.Split('-');
-            value = null;
+            var tmpValue = value.ToLower();
+            string[] name = tmpValue.Split('-');
+
+            var resultValue = string.Empty;
 
             for (int i = 0; i < name.Length; i++)
             {
                 name[i] = name[i].First().ToString().ToUpper() +
                     name[i].Substring(1);
 
-                value = value + $"{name[i]}-";
+                resultValue += $"{name[i]}-";
             }
 
-            return value.Substring(0, value.Length - 1);
+            return resultValue.Substring(0, resultValue.Length - 1);
         }                     
 
         #endregion

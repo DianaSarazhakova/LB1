@@ -27,19 +27,20 @@ namespace ProgramTestLB2
             
             Console.Write("Четвертый человек в списке - это ");
 
+            //TODO: pattern-matching +
             if (persons[3] is Adult)
             {
                 Console.WriteLine("взрослый человек.");
-                var person = persons[3] as Adult;
+                var person = (Adult)persons[3];
                 Console.WriteLine(person.GoToNightclub(person));
             }
             else if (persons[3] is Child)
             {
                 Console.WriteLine("ребенок.");
-                var person = persons[3] as Child;
+                var person = (Child)persons[3];
                 Console.WriteLine(person.GoToNightclub(person));
-            }
-
+            }      
+                      
             Console.ReadKey();
         }
     }

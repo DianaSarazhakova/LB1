@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonLib.csproj" />
-    <ProjectReference Include="..\PersonTest\PersonTest.csproj" />
   </ItemGroup>
 
 </Project>

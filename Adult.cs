@@ -9,7 +9,7 @@ namespace PersonLib
     /// <summary>
     /// Взрослый человек
     /// </summary>
-    public class Adult : Person
+    public class Adult : PersonBase
     {
 
         #region Константы
@@ -177,7 +177,7 @@ namespace PersonLib
             {
                 var info = base.Info +
                     $"\nСерия паспорта: {PassportSerial}\nНомер паспорта: " +
-                    $"{PassportNumber}\nСемейное положение: {MaritalStatus}";
+                    $"{PassportNumber}\nСемейное положение: {TranslateMaritalstatus(MaritalStatus)}";
 
                 if (MaritalStatus == MaritalStatus.Married)
                 {
@@ -232,6 +232,33 @@ namespace PersonLib
         #endregion
 
         #region Методы
+
+        /// <summary> 
+        /// Прописывает семейное положение русскими буквами
+        /// </summary>        
+        /// <param name="maritalStatus">Гендер для перевода</param>
+        public static string TranslateMaritalstatus(MaritalStatus maritalStatus)
+        {
+            switch (maritalStatus)
+            {
+                case MaritalStatus.Married:
+                    {
+                        return "Женат(замужем)";
+                    }                                    
+                case MaritalStatus.Widowed:
+                    {
+                        return  "Вдовец(вдова)";                        
+                    }
+                case MaritalStatus.Divorced:
+                    {
+                        return "В разводе";                        
+                    }
+               default:
+                    {
+                        return  "Не женат(не замужем)";                        
+                    }
+            }
+        }
 
         /// <summary>
         /// Проверить серию/номер паспорта на корректность

@@ -6,12 +6,29 @@ using System.Threading.Tasks;
 
 namespace PersonLib
 {
-    
+    /// <summary>
+    /// Семейное положение
+    /// </summary>
     public enum MaritalStatus 
     {
-        Single, 
-        Married, 
-        Widowed,  //вдова
-        Divorced, //разведен        
+        /// <summary>
+        /// Одинокий одиночка
+        /// </summary>
+        Single,
+
+        /// <summary>
+        /// В браке
+        /// </summary>
+        Married,
+
+        /// <summary>
+        /// Вдвова
+        /// </summary>
+        Widowed,  
+
+        /// <summary>
+        /// В разводе
+        /// </summary>
+        Divorced,       
     }
 }

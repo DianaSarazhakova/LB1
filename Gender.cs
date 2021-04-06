@@ -9,10 +9,10 @@ namespace PersonLib
     /// Пол
     /// </summary>
     public enum Gender
-    {
-        Ж,
+    {        
+        Female,
 
-        М
+        Male
     }
 }
 

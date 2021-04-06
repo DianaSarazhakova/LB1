@@ -14,7 +14,7 @@ namespace PersonLib
         /// <summary>
         /// Список людей
         /// </summary>
-        private Person[] _persons;
+        private PersonBase[] _persons;
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace PersonLib
         /// Возвращает человека из списка по указанному индексу
         /// </summary>
         /// <param name="index">индекс человека в списке</param>       
-        public Person this[int index]
+        public PersonBase this[int index]
         {
             get
             {
@@ -58,7 +58,7 @@ namespace PersonLib
         /// </summary>
         public PersonList()
         {
-            _persons = new Person[0];
+            _persons = new PersonBase[0];
         }
 
         #endregion
@@ -69,11 +69,11 @@ namespace PersonLib
         /// Добавление человека
         /// </summary>
         /// <param name="person">Человек</param>
-        public void Add(Person person)
+        public void Add(PersonBase person)
         {
             var persons = _persons;
 
-            _persons = new Person[persons.Length + 1];
+            _persons = new PersonBase[persons.Length + 1];
             for (int i = 0; i < persons.Length; i++)
             {
                 _persons[i] = persons[i];
@@ -86,7 +86,7 @@ namespace PersonLib
         /// </summary>
         public void Clear()
         {
-            _persons = new Person[0];
+            _persons = new PersonBase[0];
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace PersonLib
             var persons = _persons;
             int counter = 0;
 
-            _persons = new Person[persons.Length - 1];
+            _persons = new PersonBase[persons.Length - 1];
             for (int i = 0; i < persons.Length; i++)
             {
                 if (i != index)
@@ -118,7 +118,7 @@ namespace PersonLib
         /// Удаление человека из списка 
         /// </summary>
         /// <param name="person">Эксземпляр класса Person</param>
-        public void Delete(Person person)
+        public void Delete(PersonBase person)
         {
             DeleteByIndex(GetIndex(person));
         }        
@@ -127,7 +127,7 @@ namespace PersonLib
         /// Возвращает индекс человека, при наличии его в списке
         /// </summary>
         /// <param name="person">Экземпляр объекта класса Person</param>       
-        public int GetIndex(Person person)
+        public int GetIndex(PersonBase person)
         {
             for (int i = 0; i < _persons.Length; i++)
             {
